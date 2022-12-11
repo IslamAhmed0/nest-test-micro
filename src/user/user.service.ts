@@ -10,7 +10,7 @@ import { UserRepository } from "./repository/user.repository";
 @Injectable()
 export class UserService {
   constructor(
-              private userRepo:UserRepository
+             private userRepo:UserRepository
   ) {
   }
   async create(createUserDto: CreateUserDto) {
@@ -21,36 +21,12 @@ export class UserService {
     return await this.userRepo.save(createUserDto);
    return newUser;
   }
-  async login(email:string,password:string){
-    try {
-      const user= await this.userRepo.findOne({
-        where:{email:email}
-      })
-      if (!user) throw new BadRequestException();
-      const matchPassword=await bcrypt.compare(password,user.password);
-      if (!matchPassword) throw new HttpException(`password is not match`,HttpStatus.BAD_REQUEST)
-      user.password=undefined;
-      return user;
-    }catch (e) {
 
-    }
-  }
-
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
 
   async findOne(username: string): Promise<User | any> {
-    return this.users.find(user => user.username === username);
+    return this.userRepo.findOne({
+      where:{username:username}
+    })
   }
 
   async getByEmail(email:string){
