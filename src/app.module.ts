@@ -8,6 +8,7 @@ import { typeOrmConfigAsync } from './config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CronModule } from './modules/cron/cron.module';
+import {GetewayModule} from "./getway/getway-module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CronModule } from './modules/cron/cron.module';
     UserModule,
     CronModule,
     AuthModule,
+    GetewayModule
   ],
   controllers: [AppController],
   providers: [AppService],
