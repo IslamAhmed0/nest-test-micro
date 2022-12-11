@@ -15,6 +15,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiTags } from "@nestjs/swagger";
+import {CronJob} from "cron";
+import {CronService} from "../cron/cron.service";
 
 @Controller('user')
 @ApiTags("user")
