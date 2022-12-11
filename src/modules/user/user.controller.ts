@@ -13,10 +13,12 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtAuthGuard } from '../guard/jwt-auth.guard';
+import { JwtAuthGuard } from '../../guard/jwt-auth.guard';
 import { ApiTags } from "@nestjs/swagger";
 import {CronJob} from "cron";
 import {CronService} from "../cron/cron.service";
+import {UserRepository} from "./repository/user.repository";
+import {User} from "./entities/user.entity";
 
 @Controller('user')
 @ApiTags("user")
@@ -31,7 +33,7 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
+  findAll():Promise<User[]> {
     return this.userService.findAll();
   }
   //
